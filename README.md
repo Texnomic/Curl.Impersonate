@@ -120,6 +120,38 @@ Live HTTP tests are gated behind the `Category=E2E` xUnit trait and are skipped 
 dotnet test --filter "Category=E2E"
 ```
 
+## Releasing
+
+Releases are cut locally so the Certum SimplySign code-signing certificate stays
+off CI runners. The flow is wrapped by [`scripts/Release.ps1`](scripts/Release.ps1):
+
+1. **Make sure SimplySign Desktop is running and logged in** — this exposes the
+   code-signing cert in your `CurrentUser\My` certificate store.
+2. **Export the cert's SHA-256 fingerprint** so the script can find it:
+   ```powershell
+   $env:SIGNING_CERT_FINGERPRINT = '<your cert SHA-256 thumbprint, uppercase, no spaces>'
+   $env:NUGET_API_KEY            = '<your nuget.org API key>'
+   ```
+3. **Run the release**:
+   ```powershell
+   pwsh .\scripts\Release.ps1 -Version 1.0.0
+   ```
+
+The script will:
+
+1. Verify the working tree is clean and `main` is up-to-date.
+2. `dotnet restore`, `build`, `test` (excluding `Category=E2E`), `pack` with the
+   supplied version into `artifacts/`.
+3. Sign every produced `.nupkg` via `dotnet nuget sign` (SimplySign Mobile
+   prompts on your phone for each signature).
+4. Verify each signature with `dotnet nuget verify --all`.
+5. `dotnet nuget push --skip-duplicate` to NuGet.org.
+6. Create and push a `v1.0.0` tag, then `gh release create` with all three
+   packages attached.
+
+Skip individual phases with `-SkipBuild`, `-SkipSign`, `-SkipPush`, or
+`-SkipGitHubRelease`. Use `-DryRun` to print every command without executing.
+
 ## License
 
 [MIT](LICENSE) © Texnomic. Bundled libcurl-impersonate binaries are distributed under the upstream project's [MIT license](https://github.com/lwthiker/curl-impersonate/blob/main/LICENSE).
