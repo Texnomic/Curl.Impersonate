@@ -1,0 +1,39 @@
+# Default: normalize all text to LF in repo, native line endings in working tree
+* text=auto eol=lf
+
+# Source files
+*.cs        text diff=csharp
+*.csproj    text eol=lf
+*.props     text eol=lf
+*.targets   text eol=lf
+*.slnx      text eol=lf
+*.sln       text eol=crlf
+*.json      text eol=lf
+*.md        text eol=lf
+*.yml       text eol=lf
+*.yaml      text eol=lf
+*.editorconfig text eol=lf
+
+# Shell / scripts
+*.sh        text eol=lf
+*.cmd       text eol=crlf
+*.bat       text eol=crlf
+*.ps1       text eol=crlf
+
+# Native binaries
+*.dll       binary
+*.so        binary
+*.dylib     binary
+*.pdb       binary
+*.snk       binary
+*.pfx       binary
+*.nupkg     binary
+*.snupkg    binary
+*.png       binary
+*.jpg       binary
+*.jpeg      binary
+*.gif       binary
+*.ico       binary
+
+# Linguist hints
+runtimes/** linguist-vendored

@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Texnomic.Curl.Impersonate — Browser-Grade TLS Fingerprinting for .NET</title>
+    <meta name="description" content="A managed .NET 10 wrapper around libcurl-impersonate. Sends HTTP requests with TLS, HTTP/2, and HTTP/3 fingerprints identical to real Chrome, Firefox, Safari, Edge, and Tor.">
+    <meta name="theme-color" content="#050510">
+
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Texnomic.Curl.Impersonate">
+    <meta property="og:description" content="A managed .NET 10 wrapper around libcurl-impersonate. Bypass TLS-based bot detection by impersonating real browsers at the network layer.">
+    <meta property="og:url" content="https://curl.texnomic.com/">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Texnomic.Curl.Impersonate">
+    <meta name="twitter:description" content="Browser-grade TLS, HTTP/2, and HTTP/3 fingerprinting for .NET 10.">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Animated Background -->
+    <div class="bg-grid" aria-hidden="true"></div>
+    <div class="bg-glow bg-glow--1" aria-hidden="true"></div>
+    <div class="bg-glow bg-glow--2" aria-hidden="true"></div>
+
+    <!-- Navigation -->
+    <nav class="nav" id="nav">
+        <div class="nav__container">
+            <a href="#" class="nav__logo">
+                <svg class="nav__logo-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 2a10 10 0 100 20 10 10 0 000-20z"/>
+                    <path d="M2 12h20"/>
+                    <path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/>
+                </svg>
+                <span class="nav__logo-text">Curl<span class="nav__logo-accent">.Impersonate</span></span>
+            </a>
+            <div class="nav__links">
+                <a href="#features" class="nav__link">Features</a>
+                <a href="#targets" class="nav__link">Targets</a>
+                <a href="#quickstart" class="nav__link">Quick Start</a>
+                <a href="#how-it-works" class="nav__link">How It Works</a>
+                <a href="#packages" class="nav__link">Packages</a>
+                <a href="https://github.com/texnomic/Curl.Impersonate" class="nav__cta" target="_blank" rel="noopener">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                    GitHub
+                </a>
+            </div>
+            <button class="nav__mobile-toggle" id="mobileToggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="#features" class="mobile-menu__link">Features</a>
+        <a href="#targets" class="mobile-menu__link">Targets</a>
+        <a href="#quickstart" class="mobile-menu__link">Quick Start</a>
+        <a href="#how-it-works" class="mobile-menu__link">How It Works</a>
+        <a href="#packages" class="mobile-menu__link">Packages</a>
+        <a href="https://github.com/texnomic/Curl.Impersonate" class="mobile-menu__link" target="_blank" rel="noopener">GitHub</a>
+    </div>
+
+    <!-- Hero Section -->
+    <header class="hero">
+        <div class="hero__container hero__container--stacked">
+            <div class="hero__content hero__content--centered">
+                <div class="hero__badge">
+                    <span class="hero__badge-dot"></span>
+                    Open-Source · .NET 10
+                </div>
+                <h1 class="hero__title">
+                    Curl<span class="hero__title-accent">.Impersonate</span>
+                </h1>
+                <p class="hero__subtitle">
+                    A managed <strong>.NET 10</strong> wrapper around <strong>libcurl-impersonate</strong>. Sends HTTP requests with TLS, HTTP/2, and HTTP/3 fingerprints identical to real Chrome, Firefox, Safari, Edge, and Tor — bypassing TLS-based bot detection without browser automation.
+                </p>
+                <div class="hero__actions">
+                    <a href="#quickstart" class="btn btn--primary">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="13 17 18 12 13 7"/><polyline points="6 17 11 12 6 7"/></svg>
+                        Get Started
+                    </a>
+                    <a href="https://github.com/texnomic/Curl.Impersonate" class="btn btn--ghost" target="_blank" rel="noopener">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+                        View Source
+                    </a>
+                </div>
+                <div class="hero__stats">
+                    <div class="hero__stat">
+                        <img src="https://img.shields.io/nuget/v/Texnomic.Curl.Impersonate?style=flat&color=00d4ff&labelColor=0a0a1a&logo=nuget" alt="NuGet">
+                    </div>
+                    <div class="hero__stat">
+                        <img src="https://img.shields.io/nuget/dt/Texnomic.Curl.Impersonate?style=flat&color=00d4ff&labelColor=0a0a1a&logo=nuget" alt="Downloads">
+                    </div>
+                    <div class="hero__stat">
+                        <img src="https://img.shields.io/github/stars/texnomic/Curl.Impersonate?style=flat&color=00d4ff&labelColor=0a0a1a&logo=github" alt="GitHub Stars">
+                    </div>
+                    <div class="hero__stat">
+                        <img src="https://img.shields.io/github/license/texnomic/Curl.Impersonate?style=flat&color=00d4ff&labelColor=0a0a1a" alt="License">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Code preview card -->
+            <div class="hero__code">
+                <div class="hero__code-glow" aria-hidden="true"></div>
+                <div class="hero__code-window">
+                    <div class="hero__code-titlebar">
+                        <span class="hero__code-dot hero__code-dot--red"></span>
+                        <span class="hero__code-dot hero__code-dot--amber"></span>
+                        <span class="hero__code-dot hero__code-dot--green"></span>
+                        <span class="hero__code-filename">Program.cs</span>
+                    </div>
+<pre class="hero__code-body"><code><span class="tok-k">using</span> <span class="tok-n">Texnomic.Curl.Impersonate</span>;
+
+<span class="tok-k">using</span> <span class="tok-k">var</span> <span class="tok-v">Client</span> = <span class="tok-k">new</span> <span class="tok-t">CurlHttpClient</span>(<span class="tok-t">ImpersonateTarget</span>.<span class="tok-v">Chrome146</span>);
+
+<span class="tok-k">using</span> <span class="tok-k">var</span> <span class="tok-v">Response</span> = <span class="tok-k">await</span> <span class="tok-v">Client</span>.<span class="tok-m">GetAsync</span>(<span class="tok-s">"https://tls.peet.ws/api/all"</span>);
+
+<span class="tok-v">Response</span>.<span class="tok-m">EnsureSuccessStatusCode</span>();
+
+<span class="tok-k">var</span> <span class="tok-v">Body</span> = <span class="tok-k">await</span> <span class="tok-v">Response</span>.<span class="tok-v">Content</span>.<span class="tok-m">ReadAsStringAsync</span>();
+<span class="tok-t">Console</span>.<span class="tok-m">WriteLine</span>(<span class="tok-v">Body</span>);</code></pre>
+                </div>
+            </div>
+        </div>
+        <div class="hero__scroll">
+            <span>Scroll to explore</span>
+            <div class="hero__scroll-line"></div>
+        </div>
+    </header>
+
+    <!-- Features Section -->
+    <section class="section" id="features">
+        <div class="section__container">
+            <div class="section__header">
+                <span class="section__label">Features</span>
+                <h2 class="section__title">Built for <span class="text-gradient">Stealth</span>.<br>Shaped like <code class="inline-code">HttpClient</code>.</h2>
+                <p class="section__description">A familiar managed surface backed by a curl that lies convincingly about who it is. Every request fingerprints as a real browser at the TLS, HTTP/2, and HTTP/3 layer.</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-card__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>
+                    </div>
+                    <h3 class="feature-card__title">Real Browser Fingerprints</h3>
+                    <p class="feature-card__desc">Replays the exact ClientHello extensions, cipher order, ALPN, ALPS, and GREASE values of real browsers. JA3, JA4, and HTTP/2 SETTINGS all line up.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-card__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                    </div>
+                    <h3 class="feature-card__title">Defeats TLS Bot Detection</h3>
+                    <p class="feature-card__desc">Bypasses Cloudflare, Akamai, DataDome, and PerimeterX without browser automation, cookies, or JavaScript challenges.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-card__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+                    </div>
+                    <h3 class="feature-card__title">Familiar API Surface</h3>
+                    <p class="feature-card__desc"><code class="inline-code">CurlHttpClient</code> mirrors <code class="inline-code">HttpClient</code>: <code class="inline-code">GetAsync</code>, <code class="inline-code">PostAsJsonAsync</code>, <code class="inline-code">SendAsync</code>, <code class="inline-code">BaseAddress</code>, <code class="inline-code">DefaultHeaders</code>. Drop-in feel.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-card__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                    </div>
+                    <h3 class="feature-card__title">CancellationToken Aware</h3>
+                    <p class="feature-card__desc">Every async overload accepts a <code class="inline-code">CancellationToken</code>. libcurl's xferinfo callback aborts the native transfer the moment the token fires.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-card__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg>
+                    </div>
+                    <h3 class="feature-card__title">Split Runtime Packages</h3>
+                    <p class="feature-card__desc">Natives are shipped as per-RID NuGet sub-packages. Restore pulls only the binary your platform needs — no 30 MB tax on every project.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-card__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+                    </div>
+                    <h3 class="feature-card__title">Modern .NET 10 + C# Latest</h3>
+                    <p class="feature-card__desc">Nullable-enabled, <code class="inline-code">LibraryImport</code> source-generated P/Invoke, <code class="inline-code">TreatWarningsAsErrors</code>, deterministic builds, SourceLink + symbol packages.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Browser Targets Section -->
+    <section class="section section--dark" id="targets">
+        <div class="section__container">
+            <div class="section__header">
+                <span class="section__label">Browser Targets</span>
+                <h2 class="section__title">Every Major Browser.<br><span class="text-gradient">Every Recent Version.</span></h2>
+                <p class="section__description">Pick any target from <code class="inline-code">ImpersonateTarget</code> — or pass a custom string for fingerprints added in newer libcurl-impersonate releases.</p>
+            </div>
+            <div class="protocols-grid">
+                <div class="protocol-card protocol-card--active">
+                    <div class="protocol-card__status protocol-card__status--done">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+                    </div>
+                    <div class="protocol-card__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="4"/><line x1="21.17" y1="8" x2="12" y2="8"/><line x1="3.95" y1="6.06" x2="8.54" y2="14"/><line x1="10.88" y1="21.94" x2="15.46" y2="14"/></svg>
+                    </div>
+                    <h3 class="protocol-card__title">Chrome</h3>
+                    <p class="protocol-card__desc">99 → 146 on desktop, 99 &amp; 131 on Android. <code class="inline-code">Chrome146</code> is the current default.</p>
+                </div>
+                <div class="protocol-card protocol-card--active">
+                    <div class="protocol-card__status protocol-card__status--done">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+                    </div>
+                    <div class="protocol-card__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M8 13a4 4 0 008 0"/></svg>
+                    </div>
+                    <h3 class="protocol-card__title">Firefox</h3>
+                    <p class="protocol-card__desc">133, 135, 144, 147. NSS-backed handshake matches Mozilla's stock builds.</p>
+                </div>
+                <div class="protocol-card protocol-card--active">
+                    <div class="protocol-card__status protocol-card__status--done">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+                    </div>
+                    <div class="protocol-card__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+                    </div>
+                    <h3 class="protocol-card__title">Safari</h3>
+                    <p class="protocol-card__desc">15.3 → 26.0 on desktop; 17.2 → 26.0 on iOS. Apple's SecureTransport quirks faithfully replicated.</p>
+                </div>
+                <div class="protocol-card protocol-card--active">
+                    <div class="protocol-card__status protocol-card__status--done">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+                    </div>
+                    <div class="protocol-card__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 8a4 4 0 100 8"/></svg>
+                    </div>
+                    <h3 class="protocol-card__title">Microsoft Edge</h3>
+                    <p class="protocol-card__desc">Edge 99 and 101. Chromium-based handshake with Microsoft-specific extension order.</p>
+                </div>
+                <div class="protocol-card protocol-card--active">
+                    <div class="protocol-card__status protocol-card__status--done">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+                    </div>
+                    <div class="protocol-card__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 2a10 10 0 000 20"/><circle cx="12" cy="12" r="4"/></svg>
+                    </div>
+                    <h3 class="protocol-card__title">Tor Browser</h3>
+                    <p class="protocol-card__desc">Tor 14.5 fingerprint. Pair with a Tor SOCKS proxy for end-to-end anonymity.</p>
+                </div>
+                <div class="protocol-card protocol-card--active">
+                    <div class="protocol-card__status protocol-card__status--done">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+                    </div>
+                    <div class="protocol-card__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+                    </div>
+                    <h3 class="protocol-card__title">Custom Targets</h3>
+                    <p class="protocol-card__desc">Implicit <code class="inline-code">string</code> conversion lets you pass any libcurl-impersonate target that the upstream binary supports — no recompile.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quick Start Section -->
+    <section class="section" id="quickstart">
+        <div class="section__container">
+            <div class="section__header">
+                <span class="section__label">Quick Start</span>
+                <h2 class="section__title">Three lines from <span class="text-gradient">install</span> to <span class="text-gradient">impersonation</span>.</h2>
+                <p class="section__description">No native build chain. No browser binary. Just a NuGet install and an HttpClient-shaped API.</p>
+            </div>
+
+            <div class="steps">
+                <div class="step">
+                    <div class="step__index">01</div>
+                    <div class="step__body">
+                        <h3 class="step__title">Install the package</h3>
+                        <p class="step__desc">The main package automatically pulls the native sub-package for your runtime.</p>
+                        <div class="code-window">
+                            <div class="code-window__tabs">
+                                <span class="code-window__tab code-window__tab--active">dotnet</span>
+                                <span class="code-window__tab">PackageReference</span>
+                            </div>
+<pre class="code-window__body"><code><span class="tok-c">$</span> dotnet add package <span class="tok-s">Texnomic.Curl.Impersonate</span></code></pre>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step__index">02</div>
+                    <div class="step__body">
+                        <h3 class="step__title">Pick an impersonation target</h3>
+                        <p class="step__desc">Every supported browser lives on the <code class="inline-code">ImpersonateTarget</code> type as a static field.</p>
+                        <div class="code-window">
+                            <div class="code-window__tabs">
+                                <span class="code-window__tab code-window__tab--active">C#</span>
+                            </div>
+<pre class="code-window__body"><code><span class="tok-k">using</span> <span class="tok-n">Texnomic.Curl.Impersonate</span>;
+
+<span class="tok-k">using</span> <span class="tok-k">var</span> <span class="tok-v">Client</span> = <span class="tok-k">new</span> <span class="tok-t">CurlHttpClient</span>(<span class="tok-t">ImpersonateTarget</span>.<span class="tok-v">Chrome146</span>);
+
+<span class="tok-c">// or pick any other supported browser</span>
+<span class="tok-k">var</span> <span class="tok-v">Firefox</span>  = <span class="tok-k">new</span> <span class="tok-t">CurlHttpClient</span>(<span class="tok-t">ImpersonateTarget</span>.<span class="tok-v">Firefox147</span>);
+<span class="tok-k">var</span> <span class="tok-v">Safari</span>   = <span class="tok-k">new</span> <span class="tok-t">CurlHttpClient</span>(<span class="tok-t">ImpersonateTarget</span>.<span class="tok-v">Safari260</span>);
+<span class="tok-k">var</span> <span class="tok-v">Edge</span>     = <span class="tok-k">new</span> <span class="tok-t">CurlHttpClient</span>(<span class="tok-t">ImpersonateTarget</span>.<span class="tok-v">Edge101</span>);</code></pre>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step__index">03</div>
+                    <div class="step__body">
+                        <h3 class="step__title">Send a request</h3>
+                        <p class="step__desc">Same shape as <code class="inline-code">HttpClient</code>. Default headers, base address, timeouts, cancellation tokens, JSON helpers — all there.</p>
+                        <div class="code-window">
+                            <div class="code-window__tabs">
+                                <span class="code-window__tab code-window__tab--active">C#</span>
+                            </div>
+<pre class="code-window__body"><code><span class="tok-k">using</span> <span class="tok-k">var</span> <span class="tok-v">Client</span> = <span class="tok-k">new</span> <span class="tok-t">CurlHttpClient</span>(<span class="tok-t">ImpersonateTarget</span>.<span class="tok-v">Chrome146</span>)
+{
+    <span class="tok-v">BaseAddress</span>    = <span class="tok-k">new</span> <span class="tok-t">Uri</span>(<span class="tok-s">"https://api.example.com"</span>),
+    <span class="tok-v">VerifySsl</span>      = <span class="tok-k">true</span>,
+    <span class="tok-v">Timeout</span>        = <span class="tok-t">TimeSpan</span>.<span class="tok-m">FromSeconds</span>(<span class="tok-l">30</span>),
+    <span class="tok-v">ConnectTimeout</span> = <span class="tok-t">TimeSpan</span>.<span class="tok-m">FromSeconds</span>(<span class="tok-l">10</span>),
+};
+
+<span class="tok-v">Client</span>.<span class="tok-v">DefaultHeaders</span>[<span class="tok-s">"Authorization"</span>] = <span class="tok-s">"Bearer xxx"</span>;
+
+<span class="tok-k">using</span> <span class="tok-k">var</span> <span class="tok-v">Response</span> = <span class="tok-k">await</span> <span class="tok-v">Client</span>.<span class="tok-m">PostAsJsonAsync</span>(
+    <span class="tok-s">"/users"</span>,
+    <span class="tok-k">new</span> { <span class="tok-v">Name</span> = <span class="tok-s">"Ada"</span>, <span class="tok-v">Email</span> = <span class="tok-s">"ada@example.com"</span> });
+
+<span class="tok-v">Response</span>.<span class="tok-m">EnsureSuccessStatusCode</span>();</code></pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section class="section section--dark" id="how-it-works">
+        <div class="section__container">
+            <div class="section__header">
+                <span class="section__label">How It Works</span>
+                <h2 class="section__title">Three Layers of <span class="text-gradient">Indistinguishability</span></h2>
+                <p class="section__description">A TLS handshake leaks a fingerprint at every layer of the stack. libcurl-impersonate replays each layer to match a real browser byte-for-byte.</p>
+            </div>
+            <div class="arch-diagram">
+                <div class="arch-layer arch-layer--1">
+                    <div class="arch-layer__label">Layer 1 · Transport</div>
+                    <div class="arch-layer__items">
+                        <span class="arch-tag">TLS 1.2 / 1.3 ClientHello</span>
+                        <span class="arch-tag">Cipher suite order</span>
+                        <span class="arch-tag">Extension order</span>
+                        <span class="arch-tag">GREASE values</span>
+                        <span class="arch-tag">ALPN / ALPS</span>
+                        <span class="arch-tag">JA3 · JA4</span>
+                    </div>
+                </div>
+                <div class="arch-connector">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/></svg>
+                </div>
+                <div class="arch-layer arch-layer--2">
+                    <div class="arch-layer__label">Layer 2 · HTTP/2 &amp; HTTP/3</div>
+                    <div class="arch-layer__items">
+                        <span class="arch-tag">SETTINGS frame</span>
+                        <span class="arch-tag">WINDOW_UPDATE pattern</span>
+                        <span class="arch-tag">Header pseudo-order</span>
+                        <span class="arch-tag">HPACK dynamic table</span>
+                        <span class="arch-tag">QUIC transport params</span>
+                    </div>
+                </div>
+                <div class="arch-connector">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/></svg>
+                </div>
+                <div class="arch-layer arch-layer--3">
+                    <div class="arch-layer__label">Layer 3 · Application</div>
+                    <div class="arch-layer__items">
+                        <span class="arch-tag">User-Agent header</span>
+                        <span class="arch-tag">Accept-* defaults</span>
+                        <span class="arch-tag">Sec-CH-UA hints</span>
+                        <span class="arch-tag">Header casing &amp; order</span>
+                    </div>
+                </div>
+                <div class="arch-connector">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/></svg>
+                </div>
+                <div class="arch-layer arch-layer--4">
+                    <div class="arch-layer__label">Verify · Fingerprint Inspectors</div>
+                    <div class="arch-layer__items">
+                        <span class="arch-tag">tls.peet.ws</span>
+                        <span class="arch-tag">tlsfingerprint.io</span>
+                        <span class="arch-tag">browserleaks.com/tls</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Platforms Section -->
+    <section class="section" id="platforms">
+        <div class="section__container">
+            <div class="section__header">
+                <span class="section__label">Platforms</span>
+                <h2 class="section__title">Native Where You <span class="text-gradient">Run It</span>.</h2>
+                <p class="section__description">Shipped today: Windows x64 and Linux x64. macOS and Linux arm64 sub-packages are planned — contributions welcome.</p>
+            </div>
+            <div class="platforms-showcase">
+                <div class="platforms-row">
+                    <div class="platform-item">
+                        <div class="platform-item__icon">
+                            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M0 3.449L9.75 2.1v9.451H0m10.949-9.602L24 0v11.4H10.949M0 12.6h9.75v9.451L0 20.699M10.949 12.6H24V24l-12.9-1.801"/></svg>
+                        </div>
+                        <span class="platform-item__name">Windows</span>
+                        <span class="platform-item__detail">x64 · shipped</span>
+                    </div>
+                    <div class="platform-item">
+                        <div class="platform-item__icon">
+                            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.504 0c-.155 0-.311.015-.465.035l-.005.004a12.44 12.44 0 00-.57.098c-.37.08-.736.2-1.095.36a8.137 8.137 0 00-1.03.575 5.898 5.898 0 00-.85.67l-.078.075a6.137 6.137 0 00-.712.81 5.444 5.444 0 00-.496.78c-.16.303-.29.63-.395.978-.105.35-.179.72-.23 1.105-.05.38-.075.78-.075 1.19v1.06c0 1.04.12 1.995.34 2.87.22.88.54 1.68.97 2.4.43.72.95 1.35 1.555 1.89.6.54 1.285.97 2.045 1.29a6.7 6.7 0 002.505.48 6.7 6.7 0 002.505-.48c.76-.32 1.445-.75 2.045-1.29.605-.54 1.125-1.17 1.555-1.89.43-.72.75-1.52.97-2.4.22-.875.34-1.83.34-2.87v-1.06c0-.41-.025-.81-.075-1.19-.05-.385-.125-.755-.23-1.105a4.817 4.817 0 00-.395-.978 5.444 5.444 0 00-.496-.78 6.137 6.137 0 00-.712-.81l-.078-.075a5.898 5.898 0 00-.85-.67 8.137 8.137 0 00-1.03-.575 5.96 5.96 0 00-1.095-.36 12.44 12.44 0 00-.57-.098l-.005-.004A3.766 3.766 0 0012.504 0z"/></svg>
+                        </div>
+                        <span class="platform-item__name">Linux</span>
+                        <span class="platform-item__detail">x64 (glibc) · shipped</span>
+                    </div>
+                    <div class="platform-item platform-item--pending">
+                        <div class="platform-item__icon">
+                            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+                        </div>
+                        <span class="platform-item__name">macOS</span>
+                        <span class="platform-item__detail">arm64 &amp; x64 · planned</span>
+                    </div>
+                </div>
+                <div class="platforms-arch">
+                    <h3 class="platforms-arch__title">Runtime Identifiers</h3>
+                    <div class="platforms-arch__grid">
+                        <div class="arch-chip"><span class="arch-chip__icon">●</span> win-x64</div>
+                        <div class="arch-chip"><span class="arch-chip__icon">●</span> linux-x64</div>
+                        <div class="arch-chip arch-chip--pending"><span class="arch-chip__icon">○</span> osx-arm64</div>
+                        <div class="arch-chip arch-chip--pending"><span class="arch-chip__icon">○</span> osx-x64</div>
+                        <div class="arch-chip arch-chip--pending"><span class="arch-chip__icon">○</span> linux-arm64</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- NuGet Packages Section -->
+    <section class="section section--dark" id="packages">
+        <div class="section__container">
+            <div class="section__header">
+                <span class="section__label">Packages</span>
+                <h2 class="section__title">Modular on <span class="text-gradient">NuGet</span></h2>
+                <p class="section__description">Install the main package and NuGet will resolve the right native sub-package for your runtime automatically.</p>
+            </div>
+            <div class="packages-grid">
+                <a class="package-card" href="https://www.nuget.org/packages/Texnomic.Curl.Impersonate" target="_blank" rel="noopener">
+                    <div class="package-card__name">Texnomic.Curl.Impersonate</div>
+                    <img src="https://img.shields.io/nuget/v/Texnomic.Curl.Impersonate?style=flat&color=00d4ff&labelColor=0a0a1a&logo=nuget" alt="NuGet" loading="lazy">
+                </a>
+                <a class="package-card" href="https://www.nuget.org/packages/Texnomic.Curl.Impersonate.Runtime.win-x64" target="_blank" rel="noopener">
+                    <div class="package-card__name">Texnomic.Curl.Impersonate.Runtime.win-x64</div>
+                    <img src="https://img.shields.io/nuget/v/Texnomic.Curl.Impersonate.Runtime.win-x64?style=flat&color=00d4ff&labelColor=0a0a1a&logo=nuget" alt="NuGet" loading="lazy">
+                </a>
+                <a class="package-card" href="https://www.nuget.org/packages/Texnomic.Curl.Impersonate.Runtime.linux-x64" target="_blank" rel="noopener">
+                    <div class="package-card__name">Texnomic.Curl.Impersonate.Runtime.linux-x64</div>
+                    <img src="https://img.shields.io/nuget/v/Texnomic.Curl.Impersonate.Runtime.linux-x64?style=flat&color=00d4ff&labelColor=0a0a1a&logo=nuget" alt="NuGet" loading="lazy">
+                </a>
+                <a class="package-card package-card--pending" href="https://github.com/texnomic/Curl.Impersonate" target="_blank" rel="noopener">
+                    <div class="package-card__name">Texnomic.Curl.Impersonate.Runtime.osx-arm64</div>
+                    <span class="package-badge">Planned</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="section section--cta">
+        <div class="section__container">
+            <div class="cta">
+                <div class="cta__glow" aria-hidden="true"></div>
+                <h2 class="cta__title">Ready to look like a real browser?</h2>
+                <p class="cta__desc">Install the package, pick a target, send a request. The TLS fingerprint inspectors will tell you everything matches.</p>
+                <div class="cta__actions">
+                    <a href="https://www.nuget.org/packages/Texnomic.Curl.Impersonate" class="btn btn--primary btn--lg" target="_blank" rel="noopener">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                        Install from NuGet
+                    </a>
+                    <a href="https://github.com/texnomic/Curl.Impersonate#readme" class="btn btn--ghost btn--lg" target="_blank" rel="noopener">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg>
+                        Read the Docs
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer__container">
+            <div class="footer__top">
+                <div class="footer__brand">
+                    <div class="footer__logo">
+                        <svg class="footer__logo-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"/>
+                            <path d="M2 12h20"/>
+                            <path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/>
+                        </svg>
+                        <span class="footer__logo-text">Curl<span class="footer__logo-accent">.Impersonate</span></span>
+                    </div>
+                    <p class="footer__tagline">Browser-grade TLS, HTTP/2 and HTTP/3 fingerprinting for .NET 10.</p>
+                </div>
+                <div class="footer__links">
+                    <div class="footer__col">
+                        <h4 class="footer__col-title">Project</h4>
+                        <a href="https://github.com/texnomic/Curl.Impersonate" target="_blank" rel="noopener">GitHub</a>
+                        <a href="https://github.com/texnomic/Curl.Impersonate/releases" target="_blank" rel="noopener">Releases</a>
+                        <a href="https://github.com/texnomic/Curl.Impersonate/blob/main/CHANGELOG.md" target="_blank" rel="noopener">Changelog</a>
+                        <a href="https://github.com/texnomic/Curl.Impersonate#readme" target="_blank" rel="noopener">Documentation</a>
+                    </div>
+                    <div class="footer__col">
+                        <h4 class="footer__col-title">Packages</h4>
+                        <a href="https://www.nuget.org/packages/Texnomic.Curl.Impersonate" target="_blank" rel="noopener">Main package</a>
+                        <a href="https://www.nuget.org/packages/Texnomic.Curl.Impersonate.Runtime.win-x64" target="_blank" rel="noopener">Runtime · win-x64</a>
+                        <a href="https://www.nuget.org/packages/Texnomic.Curl.Impersonate.Runtime.linux-x64" target="_blank" rel="noopener">Runtime · linux-x64</a>
+                        <a href="https://www.nuget.org/profiles/Texnomic" target="_blank" rel="noopener">All Texnomic packages</a>
+                    </div>
+                    <div class="footer__col">
+                        <h4 class="footer__col-title">Upstream</h4>
+                        <a href="https://github.com/lwthiker/curl-impersonate" target="_blank" rel="noopener">curl-impersonate</a>
+                        <a href="https://github.com/curl/curl" target="_blank" rel="noopener">curl</a>
+                        <a href="https://boringssl.googlesource.com/boringssl/" target="_blank" rel="noopener">BoringSSL</a>
+                        <a href="https://github.com/texnomic/Curl.Impersonate/issues" target="_blank" rel="noopener">Report an Issue</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer__bottom">
+                <p class="footer__copyright">&copy; 2026 Texnomic. Released under the MIT License.</p>
+                <div class="footer__meta">
+                    <span>Built on <a href="https://github.com/lwthiker/curl-impersonate" target="_blank" rel="noopener">lwthiker/curl-impersonate</a></span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

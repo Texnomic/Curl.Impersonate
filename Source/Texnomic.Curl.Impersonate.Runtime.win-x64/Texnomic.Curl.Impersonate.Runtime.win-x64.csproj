@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <PackageId>Texnomic.Curl.Impersonate.Runtime.win-x64</PackageId>
+    <Description>Native libcurl-impersonate binaries for the win-x64 runtime, consumed transitively by Texnomic.Curl.Impersonate. Not intended for direct use.</Description>
+
+    <!-- Native-only meta package: no managed code, no compile, no symbols. -->
+    <IncludeBuildOutput>false</IncludeBuildOutput>
+    <IncludeSymbols>false</IncludeSymbols>
+    <GenerateDocumentationFile>false</GenerateDocumentationFile>
+    <NoWarn>$(NoWarn);NU5128</NoWarn> <!-- no managed dependency group -->
+    <SuppressDependenciesWhenPacking>true</SuppressDependenciesWhenPacking>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="runtimes\win-x64\native\libcurl-impersonate.dll"
+          Pack="true"
+          PackagePath="runtimes\win-x64\native\libcurl-impersonate.dll" />
+    <None Include="runtimes\win-x64\native\zlib.dll"
+          Pack="true"
+          PackagePath="runtimes\win-x64\native\zlib.dll" />
+  </ItemGroup>
+
+</Project>

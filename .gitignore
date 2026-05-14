@@ -1,0 +1,62 @@
+# Build output
+[Bb]in/
+[Oo]bj/
+[Oo]ut/
+[Ll]og/
+[Ll]ogs/
+
+# NuGet output
+*.nupkg
+*.snupkg
+artifacts/
+
+# Visual Studio
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+*.userprefs
+
+# Rider / ReSharper
+.idea/
+_ReSharper*/
+*.[Rr]e[Ss]harper
+*.DotSettings.user
+
+# VS Code
+.vscode/
+
+# Coverage
+*.coverage
+*.coveragexml
+coverage*.json
+coverage*.xml
+coverage*.info
+TestResults/
+[Tt]est[Rr]esult*/
+
+# BenchmarkDotNet
+BenchmarkDotNet.Artifacts/
+
+# OS junk
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Local secrets
+*.pfx
+*.snk
+*.env
+secrets.json
+appsettings.*.Local.json
+
+# Tooling caches
+.nuget/
+node_modules/
+
+# Per-user tool state
+.claude/
+
+# GitHub Pages local preview
+_site/

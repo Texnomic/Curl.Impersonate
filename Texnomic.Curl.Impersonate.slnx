@@ -1,0 +1,22 @@
+<Solution>
+  <Folder Name="/Solution Items/">
+    <File Path=".editorconfig" />
+    <File Path=".gitattributes" />
+    <File Path=".gitignore" />
+    <File Path="CHANGELOG.md" />
+    <File Path="Directory.Build.props" />
+    <File Path="Directory.Build.targets" />
+    <File Path="Directory.Packages.props" />
+    <File Path="LICENSE" />
+    <File Path="README.md" />
+    <File Path="global.json" />
+  </Folder>
+  <Folder Name="/Source/">
+    <Project Path="Source/Texnomic.Curl.Impersonate/Texnomic.Curl.Impersonate.csproj" />
+    <Project Path="Source/Texnomic.Curl.Impersonate.Runtime.win-x64/Texnomic.Curl.Impersonate.Runtime.win-x64.csproj" />
+    <Project Path="Source/Texnomic.Curl.Impersonate.Runtime.linux-x64/Texnomic.Curl.Impersonate.Runtime.linux-x64.csproj" />
+  </Folder>
+  <Folder Name="/Tests/">
+    <Project Path="Tests/Texnomic.Curl.Impersonate.Tests/Texnomic.Curl.Impersonate.Tests.csproj" />
+  </Folder>
+</Solution>

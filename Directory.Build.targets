@@ -1,0 +1,8 @@
+<Project>
+
+  <!-- SourceLink applies to every packable project that builds managed code. -->
+  <ItemGroup Condition="'$(IsPackable)' == 'true' AND '$(IncludeBuildOutput)' != 'false'">
+    <PackageReference Include="Microsoft.SourceLink.GitHub" PrivateAssets="All" />
+  </ItemGroup>
+
+</Project>

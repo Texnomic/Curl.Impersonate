@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <PackageId>Texnomic.Curl.Impersonate</PackageId>
+    <Title>Texnomic.Curl.Impersonate</Title>
+    <Description>Managed .NET 10 wrapper around libcurl-impersonate. Sends HTTP requests with TLS, HTTP/2 and HTTP/3 fingerprints identical to real Chrome, Firefox, Safari, Edge and Tor browsers, bypassing TLS-based bot detection (Cloudflare, Akamai, DataDome, PerimeterX).</Description>
+    <Summary>libcurl-impersonate bindings with browser-grade TLS fingerprinting for .NET 10.</Summary>
+
+    <RootNamespace>Texnomic.Curl.Impersonate</RootNamespace>
+    <AssemblyName>Texnomic.Curl.Impersonate</AssemblyName>
+
+    <!-- Generate XML docs; failing missing-comment as a warning (filtered globally in Directory.Build.props). -->
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+  </PropertyGroup>
+
+  <!--
+    Each runtime sub-package contains ONLY the natives for its RID under
+    runtimes/<rid>/native/. NuGet automatically picks the correct one based on
+    the consumer's runtime at execution time. Adding these as ProjectReferences
+    makes them show up as NuGet dependencies in the resulting nupkg.
+  -->
+  <ItemGroup>
+    <ProjectReference Include="..\Texnomic.Curl.Impersonate.Runtime.win-x64\Texnomic.Curl.Impersonate.Runtime.win-x64.csproj" />
+    <ProjectReference Include="..\Texnomic.Curl.Impersonate.Runtime.linux-x64\Texnomic.Curl.Impersonate.Runtime.linux-x64.csproj" />
+  </ItemGroup>
+
+</Project>

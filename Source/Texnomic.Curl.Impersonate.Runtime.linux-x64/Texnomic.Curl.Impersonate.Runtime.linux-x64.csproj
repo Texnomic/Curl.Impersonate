@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <PackageId>Texnomic.Curl.Impersonate.Runtime.linux-x64</PackageId>
+    <Description>Native libcurl-impersonate binaries for the linux-x64 runtime, consumed transitively by Texnomic.Curl.Impersonate. Not intended for direct use.</Description>
+
+    <IncludeBuildOutput>false</IncludeBuildOutput>
+    <IncludeSymbols>false</IncludeSymbols>
+    <GenerateDocumentationFile>false</GenerateDocumentationFile>
+    <NoWarn>$(NoWarn);NU5128</NoWarn>
+    <SuppressDependenciesWhenPacking>true</SuppressDependenciesWhenPacking>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="runtimes\linux-x64\native\libcurl-impersonate.so"
+          Pack="true"
+          PackagePath="runtimes\linux-x64\native\libcurl-impersonate.so" />
+  </ItemGroup>
+
+</Project>
