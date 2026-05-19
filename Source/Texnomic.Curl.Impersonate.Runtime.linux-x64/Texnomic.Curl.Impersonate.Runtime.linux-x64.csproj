@@ -12,10 +12,22 @@
     <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
   </PropertyGroup>
 
+  <!--
+    Pack="true" + PackagePath ships the natives inside the NuGet at
+    runtimes/<rid>/native/, the path NuGet's runtime asset resolver looks
+    up at execution time.
+    For <ProjectReference> consumers NuGet's runtime asset selection does
+    not run, so Link flattens the file into the consumer's bin root
+    (next to Texnomic.Curl.Impersonate.dll). The native loader searches
+    the directory of the calling managed assembly, so a flat layout works
+    without a deps.json runtimeTargets entry.
+  -->
   <ItemGroup>
     <None Include="runtimes\linux-x64\native\libcurl-impersonate.so"
           Pack="true"
-          PackagePath="runtimes\linux-x64\native\libcurl-impersonate.so" />
+          PackagePath="runtimes\linux-x64\native\libcurl-impersonate.so"
+          Link="libcurl-impersonate.so"
+          CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
 
 </Project>
