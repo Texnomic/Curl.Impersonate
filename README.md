@@ -71,17 +71,24 @@ using var Response = await Client.GetAsync("https://slow.example.com", Cts.Token
 
 `ImpersonateTarget` exposes static fields for every fingerprint shipped with libcurl-impersonate, including:
 
-- Chrome 99 → 146 (desktop) and Chrome 99 / 131 (Android)
+- Chrome 99 → 146 and 150 (desktop) and Chrome 99 / 131 (Android)
 - Firefox 133, 135, 144, 147
 - Safari 15.3 → 26.0 (desktop) and 17.2 → 26.0 (iOS)
 - Edge 99 / 101
 - Tor Browser 14.5
 
-Pass any of them to the `CurlHttpClient` constructor, or use an arbitrary string for targets added in upstream releases:
+Pass any of them to the `CurlHttpClient` constructor. A target the bundled
+native library supports but this wrapper has no field for yet can be passed as
+a plain string:
 
 ```csharp
-ImpersonateTarget Target = "chrome147";
+ImpersonateTarget Target = "chrome151";
 ```
+
+The string must name a target that actually exists in the bundled
+libcurl-impersonate build (v2.2.3), otherwise `curl_easy_impersonate` rejects
+it at request time. Note that Chrome and Firefox version numbers advance
+independently — `firefox147` is a real target, `chrome147` is not.
 
 ## Verifying the fingerprint
 

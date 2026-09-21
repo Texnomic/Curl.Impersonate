@@ -71,6 +71,9 @@ public readonly record struct ImpersonateTarget(string Value)
     /// <summary>Chrome 146 desktop fingerprint (current default).</summary>
     public static readonly ImpersonateTarget Chrome146 = new("chrome146");
 
+    /// <summary>Chrome 150 desktop fingerprint — the newest target shipped by libcurl-impersonate v2.2.3.</summary>
+    public static readonly ImpersonateTarget Chrome150 = new("chrome150");
+
     #endregion
 
     #region Chrome Android

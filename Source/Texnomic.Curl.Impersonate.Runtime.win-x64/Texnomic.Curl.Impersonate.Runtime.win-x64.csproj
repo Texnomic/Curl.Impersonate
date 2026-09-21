@@ -29,11 +29,12 @@
           PackagePath="runtimes\win-x64\native\libcurl-impersonate.dll"
           Link="libcurl-impersonate.dll"
           CopyToOutputDirectory="PreserveNewest" />
-    <None Include="runtimes\win-x64\native\zlib.dll"
-          Pack="true"
-          PackagePath="runtimes\win-x64\native\zlib.dll"
-          Link="zlib.dll"
-          CopyToOutputDirectory="PreserveNewest" />
+    <!--
+      zlib.dll was dropped with the v2.2.3 upgrade. The build statically links
+      zlib (as well as zstd and brotli); the DLL's import table names only
+      Windows system libraries — advapi32, crypt32, iphlpapi, kernel32,
+      normaliz, ntdll and ws2_32 — so there is nothing left to satisfy.
+    -->
   </ItemGroup>
 
 </Project>
