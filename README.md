@@ -5,7 +5,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![.NET 10](https://img.shields.io/badge/.NET-10.0-512BD4.svg)](https://dotnet.microsoft.com/)
 
-Managed .NET 10 wrapper around [**libcurl-impersonate**](https://github.com/lwthiker/curl-impersonate). Sends HTTP requests with TLS, HTTP/2 and HTTP/3 fingerprints identical to real Chrome, Firefox, Safari, Edge and Tor browsers — defeating TLS-based bot detection (Cloudflare, Akamai, DataDome, PerimeterX) without browser automation, cookies, or JavaScript challenges.
+Managed .NET 10 wrapper around [**libcurl-impersonate**](https://github.com/lexiforest/curl-impersonate) (the maintained lexiforest fork of lwthiker's original). Sends HTTP requests with TLS, HTTP/2 and HTTP/3 fingerprints identical to real Chrome, Firefox, Safari, Edge and Tor browsers — defeating TLS-based bot detection (Cloudflare, Akamai, DataDome, PerimeterX) without browser automation, cookies, or JavaScript challenges.
 
 ## Installation
 
@@ -13,7 +13,9 @@ Managed .NET 10 wrapper around [**libcurl-impersonate**](https://github.com/lwth
 dotnet add package Texnomic.Curl.Impersonate
 ```
 
-The package automatically pulls the native binaries for your runtime:
+The package depends on one native sub-package per supported runtime. Restore
+downloads all of them, and at run time .NET loads the binary that matches your
+platform:
 
 | Runtime sub-package | Platform |
 |---|---|
@@ -69,26 +71,27 @@ using var Response = await Client.GetAsync("https://slow.example.com", Cts.Token
 
 ## Available impersonation targets
 
-`ImpersonateTarget` exposes static fields for every fingerprint shipped with libcurl-impersonate, including:
+`ImpersonateTarget` exposes a static field for every documented fingerprint in the bundled libcurl-impersonate build (v2.2.3):
 
 - Chrome 99 → 146 and 150 (desktop) and Chrome 99 / 131 (Android)
 - Firefox 133, 135, 144, 147
-- Safari 15.3 → 26.0 (desktop) and 17.2 → 26.0 (iOS)
+- Safari 15.3 → 26.0.1 (desktop) and 17.2 → 26.0 (iOS)
 - Edge 99 / 101
 - Tor Browser 14.5
 
-Pass any of them to the `CurlHttpClient` constructor. A target the bundled
-native library supports but this wrapper has no field for yet can be passed as
-a plain string:
+Pass any of them to the `CurlHttpClient` constructor. Targets can also be
+passed as plain strings — for Safari's dotted aliases, or for a target that a
+future native upgrade adds before this wrapper has a field for it:
 
 ```csharp
-ImpersonateTarget Target = "chrome151";
+ImpersonateTarget Target = "safari26_0_1"; // alias of safari2601
 ```
 
-The string must name a target that actually exists in the bundled
-libcurl-impersonate build (v2.2.3), otherwise `curl_easy_impersonate` rejects
-it at request time. Note that Chrome and Firefox version numbers advance
-independently — `firefox147` is a real target, `chrome147` is not.
+The string must name a target or alias that exists in the bundled build,
+otherwise `curl_easy_impersonate` rejects it at request time. Use the lowercase
+primary name: primary names are matched case-sensitively, and only aliases fall
+back to a case-insensitive match. Note that Chrome and Firefox version numbers
+advance independently — `firefox147` is a real target, `chrome147` is not.
 
 ## Verifying the fingerprint
 
@@ -109,7 +112,7 @@ Hit any TLS fingerprint inspector while running with a target — the reported J
 
 ## How it works
 
-`libcurl-impersonate` is a fork of libcurl built against BoringSSL (Chrome) or NSS (Firefox), patched to replay the TLS handshake (ClientHello extensions, cipher order, ALPN, GREASE), HTTP/2 SETTINGS frame, and HTTP/3 transport parameters of a real browser. This package wraps that library behind a familiar `HttpClient`-shaped API.
+`libcurl-impersonate` is a fork of libcurl built against BoringSSL — for every browser profile, Firefox and Safari included — patched to replay the TLS handshake (ClientHello extensions, cipher order, ALPN, GREASE), HTTP/2 SETTINGS frame, and HTTP/3 transport parameters of a real browser. This package wraps that library behind a familiar `HttpClient`-shaped API.
 
 ## Building from source
 
@@ -129,4 +132,4 @@ dotnet test --filter "Category=E2E"
 
 ## License
 
-[MIT](LICENSE) © Texnomic. Bundled libcurl-impersonate binaries are distributed under the upstream project's [MIT license](https://github.com/lwthiker/curl-impersonate/blob/main/LICENSE).
+[MIT](LICENSE) © Texnomic. Bundled libcurl-impersonate binaries are distributed under the upstream project's [MIT license](https://github.com/lexiforest/curl-impersonate/blob/main/LICENSE).

@@ -1,19 +1,24 @@
 <Project>
 
+  <!--
+    Versions float: "*" resolves to the newest stable release on every restore,
+    so nothing here needs a manual bump. Prereleases are never picked ("*" is
+    stable-only; "*-*" would include them).
+  -->
   <PropertyGroup>
     <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
-    <CentralPackageTransitivePinningEnabled>true</CentralPackageTransitivePinningEnabled>
+    <CentralPackageFloatingVersionsEnabled>true</CentralPackageFloatingVersionsEnabled>
   </PropertyGroup>
 
   <ItemGroup>
     <!-- SourceLink -->
-    <PackageVersion Include="Microsoft.SourceLink.GitHub" Version="10.0.401" />
+    <PackageVersion Include="Microsoft.SourceLink.GitHub" Version="*" />
 
     <!-- Tests -->
-    <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.12.0" />
-    <PackageVersion Include="xunit" Version="2.9.2" />
-    <PackageVersion Include="xunit.runner.visualstudio" Version="2.8.2" />
-    <PackageVersion Include="coverlet.collector" Version="6.0.2" />
+    <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="*" />
+    <PackageVersion Include="xunit" Version="*" />
+    <PackageVersion Include="xunit.runner.visualstudio" Version="*" />
+    <PackageVersion Include="coverlet.collector" Version="*" />
   </ItemGroup>
 
 </Project>

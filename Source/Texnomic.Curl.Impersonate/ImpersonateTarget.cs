@@ -18,8 +18,11 @@ namespace Texnomic.Curl.Impersonate;
 /// release exposes a target not yet listed here.
 /// </para>
 /// <para>
-/// The list reflects the targets shipped with <c>libcurl-impersonate</c> at the
-/// time of this release. Consult the upstream project for the canonical set.
+/// The list reflects the documented targets shipped with <c>libcurl-impersonate</c>
+/// at the time of this release. Consult the upstream project for the canonical set.
+/// Raw strings must use the lowercase primary name (e.g. <c>safari2601</c>): upstream
+/// matches primary names case-sensitively and only falls back to a case-insensitive
+/// match on aliases.
 /// </para>
 /// </remarks>
 [TypeConverter(typeof(ImpersonateTargetConverter))]
@@ -121,6 +124,8 @@ public readonly record struct ImpersonateTarget(string Value)
     public static readonly ImpersonateTarget Safari184 = new("safari184");
     /// <summary>Safari 26.0 fingerprint.</summary>
     public static readonly ImpersonateTarget Safari260 = new("safari260");
+    /// <summary>Safari 26.0.1 (macOS Tahoe) fingerprint.</summary>
+    public static readonly ImpersonateTarget Safari2601 = new("safari2601");
 
     #endregion
 

@@ -144,10 +144,13 @@ if (-not $SkipBuild) {
     Write-Step 'dotnet restore'
     Invoke-Native @('dotnet', 'restore', 'Texnomic.Curl.Impersonate.slnx')
 
+    # ContinuousIntegrationBuild normalises embedded source paths (/_/...) so the
+    # published package is reproducible; Directory.Build.props only sets it on CI.
     Write-Step "dotnet build -c Release /p:Version=$Version"
     Invoke-Native @('dotnet', 'build', 'Texnomic.Curl.Impersonate.slnx',
         '--configuration', 'Release', '--no-restore',
-        "/p:Version=$Version")
+        "/p:Version=$Version",
+        '/p:ContinuousIntegrationBuild=true')
 
     Write-Step 'dotnet test (excluding Category=E2E)'
     Invoke-Native @('dotnet', 'test', 'Texnomic.Curl.Impersonate.slnx',
@@ -158,7 +161,8 @@ if (-not $SkipBuild) {
     Invoke-Native @('dotnet', 'pack', 'Texnomic.Curl.Impersonate.slnx',
         '--configuration', 'Release', '--no-build',
         '--output', $ArtifactsDir,
-        "/p:Version=$Version")
+        "/p:Version=$Version",
+        '/p:ContinuousIntegrationBuild=true')
 } else {
     Write-Step 'Skipping build phase (-SkipBuild)'
 }
