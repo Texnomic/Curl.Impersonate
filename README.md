@@ -71,11 +71,11 @@ using var Response = await Client.GetAsync("https://slow.example.com", Cts.Token
 
 ## Available impersonation targets
 
-`ImpersonateTarget` exposes a static field for every documented fingerprint in the bundled libcurl-impersonate build (v2.2.3):
+`ImpersonateTarget` exposes a static field for every documented fingerprint in the bundled libcurl-impersonate build (v2.3.0, curl 8.23.0):
 
-- Chrome 99 → 146 and 150 (desktop) and Chrome 99 / 131 (Android)
-- Firefox 133, 135, 144, 147
-- Safari 15.3 → 26.0.1 (desktop) and 17.2 → 26.0 (iOS)
+- Chrome 99 → 146 and 150 → 152 (desktop), Chrome 151 / 152 (macOS) and Chrome 99 / 131 (Android)
+- Firefox 133, 135, 144, 147, 153, 154, 155
+- Safari 15.3 → 27.0 (desktop) and 17.2 → 27.0 (iOS)
 - Edge 99 / 101
 - Tor Browser 14.5
 

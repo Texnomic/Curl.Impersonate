@@ -74,8 +74,21 @@ public readonly record struct ImpersonateTarget(string Value)
     /// <summary>Chrome 146 desktop fingerprint (current default).</summary>
     public static readonly ImpersonateTarget Chrome146 = new("chrome146");
 
-    /// <summary>Chrome 150 desktop fingerprint — the newest target shipped by libcurl-impersonate v2.2.3.</summary>
+    /// <summary>Chrome 150 desktop fingerprint.</summary>
     public static readonly ImpersonateTarget Chrome150 = new("chrome150");
+    /// <summary>Chrome 151 desktop fingerprint.</summary>
+    public static readonly ImpersonateTarget Chrome151 = new("chrome151");
+    /// <summary>Chrome 152 desktop fingerprint — the newest Chrome target shipped by libcurl-impersonate v2.3.0.</summary>
+    public static readonly ImpersonateTarget Chrome152 = new("chrome152");
+
+    #endregion
+
+    #region Chrome macOS
+
+    /// <summary>Chrome 151 on macOS fingerprint.</summary>
+    public static readonly ImpersonateTarget Chrome151Macos = new("chrome151_macos");
+    /// <summary>Chrome 152 on macOS fingerprint.</summary>
+    public static readonly ImpersonateTarget Chrome152Macos = new("chrome152_macos");
 
     #endregion
 
@@ -107,6 +120,12 @@ public readonly record struct ImpersonateTarget(string Value)
     public static readonly ImpersonateTarget Firefox144 = new("firefox144");
     /// <summary>Firefox 147 fingerprint.</summary>
     public static readonly ImpersonateTarget Firefox147 = new("firefox147");
+    /// <summary>Firefox 153 fingerprint.</summary>
+    public static readonly ImpersonateTarget Firefox153 = new("firefox153");
+    /// <summary>Firefox 154 fingerprint.</summary>
+    public static readonly ImpersonateTarget Firefox154 = new("firefox154");
+    /// <summary>Firefox 155 fingerprint.</summary>
+    public static readonly ImpersonateTarget Firefox155 = new("firefox155");
 
     #endregion
 
@@ -126,6 +145,8 @@ public readonly record struct ImpersonateTarget(string Value)
     public static readonly ImpersonateTarget Safari260 = new("safari260");
     /// <summary>Safari 26.0.1 (macOS Tahoe) fingerprint.</summary>
     public static readonly ImpersonateTarget Safari2601 = new("safari2601");
+    /// <summary>Safari 27.0 fingerprint.</summary>
+    public static readonly ImpersonateTarget Safari270 = new("safari270");
 
     #endregion
 
@@ -139,6 +160,8 @@ public readonly record struct ImpersonateTarget(string Value)
     public static readonly ImpersonateTarget Safari184Ios = new("safari184_ios");
     /// <summary>Safari 26.0 on iOS fingerprint.</summary>
     public static readonly ImpersonateTarget Safari260Ios = new("safari260_ios");
+    /// <summary>Safari 27.0 on iOS fingerprint.</summary>
+    public static readonly ImpersonateTarget Safari270Ios = new("safari270_ios");
 
     #endregion
 

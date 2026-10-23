@@ -24,4 +24,9 @@
     <ProjectReference Include="..\Texnomic.Curl.Impersonate.Runtime.linux-x64\Texnomic.Curl.Impersonate.Runtime.linux-x64.csproj" />
   </ItemGroup>
 
+  <!-- Lets the tests drive CurlEasyHandle directly, e.g. to check every target against the bundled native table. -->
+  <ItemGroup>
+    <InternalsVisibleTo Include="Texnomic.Curl.Impersonate.Tests" />
+  </ItemGroup>
+
 </Project>
